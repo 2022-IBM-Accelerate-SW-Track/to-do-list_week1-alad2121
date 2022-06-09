@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import AddToDo from "../component/AddTodo.js"
+import ToDo from '../component/todos.js';
+
+
   
 class Home extends Component {
   // A default state of this component with an empty list of todos.
@@ -6,8 +10,12 @@ class Home extends Component {
     super();
     this.state = {
       // create your empty list here call it todos.
+      todos: []
+
     };
   }
+
+
   // the addTodo function simply creates a new array that includes the user submitted todo item and then
   // updates the state with the new list.
   addTodo = (todo) => {
@@ -16,19 +24,24 @@ class Home extends Component {
     // To avoid having dup values, we use the Math.random() function to generate a random value for a todo id.
     // This solution works for a small application but a more complex hashing function should be used when
     // dealing with a larger data sensitive project.
-    todo.id = Math.random();
+    // todo.id = Math.random();
     // An array that contains the current array and the new todo item
-    let new_list = [...this.state.todos, todo];
+    let new_list = [...this.state.todos, todo.content];
     // Updates the local state with the new array.
     this.setState({
       todos: new_list,
     });
+
   };
   render() {
+ 
     return (
       <div className="Home">
         <h1>Todo's </h1>
         <p> Replace this</p>
+        <AddToDo addTodo={this.addTodo}/>
+       
+        <ToDo todos={this.state.todos}/>
       </div>
     );
   }
